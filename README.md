@@ -16,7 +16,6 @@ qqline(a5$ALDOA, col = 2);
 
 # Parametric and non-parametric difference  (exemplar analyte code)
 
-
 a1<- read.csv("~/Directory/a1.csv")
 a1$GROUP <- as.factor(a1$status)
 GROUP <-a1$GROUP 
