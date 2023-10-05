@@ -1,7 +1,7 @@
 # Paediatric-HCM-Proteomics
 #################################################################
 
-# This code was used to analyse the plasma proteomics data reported in the paper: "A plasma proteomic biomarker panel can identify hypertrophic cardiomyopathy and predict risk of sudden cardiac death in children" by Captur G, Kaski J et al.
+# This code was used to analyse the plasma proteomics data reported in the paper: "A new multiplexed plasma biomarker panel developed using targeted proteomics and machine learning has diagnostic and prognostic potential in children with hypertrophic cardiomyopathy" by Captur G, Kaski J et al.
 
 #################################################################
 
@@ -15,7 +15,6 @@ qqnorm(a5$ALDOA);
 qqline(a5$ALDOA, col = 2);
 
 # Parametric and non-parametric difference  (exemplar analyte code)
-
 
 a1<- read.csv("~/Directory/a1.csv")
 a1$GROUP <- as.factor(a1$status)
@@ -226,7 +225,7 @@ iris <- data.frame(iris[,-1], row.names=iris[,1])
 
 iris1 <- as.matrix(iris[, grep("_", colnames(iris))])
 
-col = list(Status = c("0" = "#C5CDD8", "2" = "#D99A3D", "3" = "#8F282B"))
+col = list(Status = c("0" = "#C5CDD8", "1" = "#8F282B"))
 
 row_ha = rowAnnotation(Status = iris$Status, col = col, annotation_height = unit(2, "mm"))
 
@@ -263,39 +262,6 @@ p.mat <- cor.mtest(iris)
 head(p.mat[, 1:5])
 
 corrplot(M, method="circle", type="upper", order="hclust", col=brewer.pal(n=8, name="PuOr"), tl.col="black", tl.srt=70, p.mat = p.mat, sig.level = 0.05, insig = "blank", tl.cex = 0.5)
-
-# Trajectories of mean clinical biomarker levels with SEM ribbons
-
-DF<-read.table("~/Directory/clinicalmakers.csv", header=TRUE, sep=",") 
-DF=read.table("~/Directory/clinicalmakers.csv", header=TRUE, sep=",")
-par(mar = c(1,1,1,1))
-
-ggplot(DF, aes(DF$X, DF$Y)) + theme_bw() +
-  geom_ribbon(aes(x=DF$X, ymin=DF$n, ymax=DF$p), fill = "#76b5c5", alpha=0.2)+                                   
-  geom_line(color = "#76b5c5", size = 0.8) +
-  facet_wrap(. ~ Facets, scales = "free_y", nrow=1)
-
-# Trajectories of mean proteomics biomarker levels with SEM ribbons
-
-DF<-read.table("~/Directory/proteomicsmarkers.csv", header=TRUE, sep=",") 
-DF=read.table("~/Directory/proteomicsmarkers.csv", header=TRUE, sep=",")
-par(mar = c(1,1,1,1))
-
-the_plot <- ggplot(DF, aes(DF$X, DF$Y)) + theme_bw() +
-  geom_ribbon(aes(x=DF$X, ymin=DF$n, ymax=DF$p), fill = "indianred4", alpha=0.2)+                                   
-  geom_line(color = "indianred4", size = 0.8) +
-  facet_wrap(. ~ Facets, scales = "free_y", nrow=8)  
-the_plot 
-
-# Similarity measures (examplar analyte and clinical marker)
-
-g1<-read.table("~/Directory/simi.csv", header=TRUE, sep=",")
-g1=read.table("~/Directory/simi.csv", header=TRUE, sep=",")
- 
-	path1<-as.matrix(g1$ELADZ, g1$scale)		
-	path2<-as.matrix(g1$A2AP, g1$scale)
-
-Frechet(path1, path2) 			
 
 # Required packages 
 
@@ -367,6 +333,8 @@ require(SimilarityMeasures)
 require(TSdist)
 
 #################################################################
+#################################################################
+#Follow me on twitter @gabycaptur
 #################################################################
 #################################################################
 
